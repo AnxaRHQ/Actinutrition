@@ -46,13 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        
         /* Send Device Token to AnxaPunc */
-        
-        if let deviceToken = UserDefaults.standard.object(forKey: "deviceToken")
-        {
-            NotificationHTTPClient.sharedNotificationHTTPClient().sendDeviceToken(token: deviceToken as! NSString, pushNotificationEnabled: true)
-        }
     }
     
     func applicationWillEnterForeground(_ application: UIApplication)
@@ -63,6 +57,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func applicationDidBecomeActive(_ application: UIApplication)
     {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        /* Send Device Token to AnxaPunc */
+        
+        if let deviceToken = UserDefaults.standard.object(forKey: "deviceToken")
+        {
+            NotificationHTTPClient.sharedNotificationHTTPClient().sendDeviceToken(token: deviceToken as! NSString, pushNotificationEnabled: true)
+        }
     }
     
     func applicationWillTerminate(_ application: UIApplication)
@@ -219,5 +220,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error)
     {
         print("Failed to get token, error: \(error.localizedDescription)")
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
+    {
+        completionHandler(UIBackgroundFetchResult.newData)
+        
+        let apsDict : NSDictionary  = userInfo["aps"] as! NSDictionary
+        
+        let badgeNumber : Int       = (apsDict["badge"] as? Int)!
+        let alertMessage : String   = (apsDict["alert"] as? String)!
+        
+        UIApplication.shared.applicationIconBadgeNumber = badgeNumber
+        
+        let appState : UIApplicationState = application.applicationState
+        
+        let topWindow = UIWindow(frame: UIScreen.main.bounds)
+        topWindow.rootViewController = UIViewController()
+        topWindow.windowLevel = UIWindowLevelAlert + 1
+        
+        if appState == UIApplicationState.active
+        {
+            let alertController = UIAlertController(title: appName, message: alertMessage, preferredStyle: .actionSheet)
+            
+            let okAction: UIAlertAction = UIAlertAction(title: "OK", style: .cancel)
+            { action -> Void in
+                topWindow.isHidden = true
+            }
+            alertController.addAction(okAction)
+            
+            topWindow.makeKeyAndVisible()
+            topWindow.rootViewController?.present(alertController, animated: true, completion: nil)
+        }
     }
 }
