@@ -29,6 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         UINavigationBar.appearance().backgroundColor = UIColor.white
         UINavigationBar.appearance().barTintColor = UIColor.white
         
+        /* Push Notifications */
+        
+        registerForPushNotifications()
+        
         return true
     }
     
@@ -42,6 +46,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        /* Send Device Token to AnxaPunc */
+        
+        if let deviceToken = UserDefaults.standard.object(forKey: "deviceToken")
+        {
+            NotificationHTTPClient.sharedNotificationHTTPClient().sendDeviceToken(token: deviceToken as! NSString, pushNotificationEnabled: true)
+        }
     }
     
     func applicationWillEnterForeground(_ application: UIApplication)
@@ -183,4 +194,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         }
     }
     
+    // MARK: - Push Notifications
+    
+    func registerForPushNotifications()
+    {
+        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings.init(types: [.sound, .alert, .badge], categories: nil))
+        UIApplication.shared.registerForRemoteNotifications()
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
+    {
+        let tokenParts = deviceToken.map { data -> String in
+            return String(format: "%02.2hhx", data)
+        }
+        
+        let token = tokenParts.joined()
+        print("Device Token: \(token)")
+        
+        /* Store token string in user defaults */
+        
+        UserDefaults.standard.set(token, forKey: "deviceToken")
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error)
+    {
+        print("Failed to get token, error: \(error.localizedDescription)")
+    }
 }

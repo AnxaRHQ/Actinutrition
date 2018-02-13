@@ -13,6 +13,10 @@ static NSString * const loginPageURL            = @"http://shopping.actinutritio
 static NSString * const registrationPageURL     = @"http://shopping.actinutrition.fr/register";
 static NSString * const aboutPageURL            = @"http://actinutrition.fr/Laboratoires-Actinutrition.asp";
 
+static NSString * const anxaPuncLiveURL         = @"http://api.anxa.com/AnxaPuNC/v1/";
+static NSString * const anxaPuncQCURL           = @"http://qc.api.anxa.com/AnxaPuNC/v1/";
+static NSString * const sharedKey_AnxaPunc      = @"0YeMPngXK8B3x1nQGJKR";
+
 static NSString * const appName                 = @"Actinutrition";
 
 static NSString * const anxamatsApplicationID   = @"2114";

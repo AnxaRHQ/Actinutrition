@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		19EABAB0E49BA8E7491BBEE4 /* Pods_Actinutrition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74B41CF1F0C23CBDAC849700 /* Pods_Actinutrition.framework */; };
+		C641E68520328911002FCC2F /* NotificationHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C641E68420328911002FCC2F /* NotificationHTTPClient.swift */; };
+		C641E68720328BAE002FCC2F /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C641E68620328BAE002FCC2F /* AppUtil.swift */; };
 		C6F290D8201FFCEC00052394 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F290D7201FFCEC00052394 /* AppDelegate.swift */; };
 		C6F290E0201FFCEC00052394 /* Actinutrition.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C6F290DE201FFCEC00052394 /* Actinutrition.xcdatamodeld */; };
 		C6F290E2201FFCEC00052394 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6F290E1201FFCEC00052394 /* Assets.xcassets */; };
@@ -27,6 +29,8 @@
 /* Begin PBXFileReference section */
 		0CB50E31BBB9D87C209100DB /* Pods-Actinutrition.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actinutrition.release.xcconfig"; path = "Pods/Target Support Files/Pods-Actinutrition/Pods-Actinutrition.release.xcconfig"; sourceTree = "<group>"; };
 		74B41CF1F0C23CBDAC849700 /* Pods_Actinutrition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Actinutrition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C641E68420328911002FCC2F /* NotificationHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHTTPClient.swift; sourceTree = "<group>"; };
+		C641E68620328BAE002FCC2F /* AppUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
 		C6F290D4201FFCEC00052394 /* Actinutrition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Actinutrition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6F290D7201FFCEC00052394 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6F290DF201FFCEC00052394 /* Actinutrition.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Actinutrition.xcdatamodel; sourceTree = "<group>"; };
@@ -133,9 +137,11 @@
 		C6F290F8202000E000052394 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C641E68620328BAE002FCC2F /* AppUtil.swift */,
 				C6F290F9202000E000052394 /* CalendarUtil.swift */,
 				C6F290FA202000E000052394 /* ContentUtil.swift */,
 				C6F290FB202000E000052394 /* StepCounter.swift */,
+				C641E68420328911002FCC2F /* NotificationHTTPClient.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -208,7 +214,7 @@
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -326,8 +332,10 @@
 				C6F290D8201FFCEC00052394 /* AppDelegate.swift in Sources */,
 				C6F29107202000E000052394 /* StepCounter.swift in Sources */,
 				C6F2910B202000E000052394 /* LandingPageViewController.swift in Sources */,
+				C641E68720328BAE002FCC2F /* AppUtil.swift in Sources */,
 				C6F29109202000E000052394 /* GradientView.swift in Sources */,
 				C6F29105202000E000052394 /* CalendarUtil.swift in Sources */,
+				C641E68520328911002FCC2F /* NotificationHTTPClient.swift in Sources */,
 				C6F29108202000E000052394 /* MainMenuTableViewCell.swift in Sources */,
 				C6F2910A202000E000052394 /* DashboardViewController.swift in Sources */,
 			);
@@ -470,6 +478,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Actinutrition/Actinutrition.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -494,6 +503,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Actinutrition/Actinutrition.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

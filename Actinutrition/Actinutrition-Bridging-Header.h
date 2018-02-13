@@ -14,5 +14,6 @@
 
 #import "Global.h"
 #import <AFNetworking/AFNetworking.h>
+#import <CommonCrypto/CommonDigest.h>
 
 #endif /* Actinutrition_Bridging_Header_h */
