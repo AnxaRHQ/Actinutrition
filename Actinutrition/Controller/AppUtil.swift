@@ -10,7 +10,7 @@ import UIKit
 
 class AppUtil: NSObject
 {
-    //MARK: Shared Instance
+    // MARK: Shared Instance
     
     static let sharedInstance : AppUtil =
     {

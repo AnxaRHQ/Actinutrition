@@ -331,8 +331,6 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         decisionHandler(.allow)
     }
     
-    
-    
     // MARK: - Button Actions
     
     func updateButtons()
