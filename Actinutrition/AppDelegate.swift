@@ -240,7 +240,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         
         if appState == UIApplicationState.active
         {
-            let alertController = UIAlertController(title: appName, message: alertMessage, preferredStyle: .actionSheet)
+            let alertController = UIAlertController(title: appName, message: alertMessage, preferredStyle: .alert)
             
             let okAction: UIAlertAction = UIAlertAction(title: "OK", style: .cancel)
             { action -> Void in
@@ -250,6 +250,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             
             topWindow.makeKeyAndVisible()
             topWindow.rootViewController?.present(alertController, animated: true, completion: nil)
+        }
+        else if appState == UIApplicationState.background || appState == UIApplicationState.inactive
+        {
+            let customURLTemp = NSURL(string: appName)
+            
+            if UIApplication.shared.canOpenURL(customURLTemp! as URL)
+            {
+                UIApplication.shared.openURL(customURLTemp! as URL)
+            }
         }
     }
 }
