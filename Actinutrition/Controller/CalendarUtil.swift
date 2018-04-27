@@ -10,7 +10,7 @@ import UIKit
 
 class CalendarUtil: NSObject
 {
-    //MARK: Shared Instance
+    // MARK: Shared Instance
     
     static let sharedInstance : CalendarUtil =
     {

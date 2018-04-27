@@ -29,6 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         UINavigationBar.appearance().backgroundColor = UIColor.white
         UINavigationBar.appearance().barTintColor = UIColor.white
         
+        /* Clear Badge */
+        
+        UIApplication.shared.applicationIconBadgeNumber = -1
+        
         /* Push Notifications */
         
         registerForPushNotifications()
