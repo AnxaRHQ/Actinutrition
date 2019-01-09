@@ -10,17 +10,22 @@ import UIKit
 import CoreData
 import Fabric
 import Crashlytics
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate
 {
     var window: UIWindow?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         // Override point for customization after application launch.
         
-        /*Crashlytics*/
+        /* Firebase */
+        
+        FirebaseApp.configure()
+        
+        /* Crashlytics */
         
         Fabric.with([Crashlytics.self])
         
@@ -240,13 +245,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         
         UIApplication.shared.applicationIconBadgeNumber = badgeNumber
         
-        let appState : UIApplicationState = application.applicationState
+        let appState : UIApplication.State = application.applicationState
         
         let topWindow = UIWindow(frame: UIScreen.main.bounds)
         topWindow.rootViewController = UIViewController()
-        topWindow.windowLevel = UIWindowLevelAlert + 1
+        topWindow.windowLevel = UIWindow.Level.alert + 1
         
-        if appState == UIApplicationState.active
+        if appState == UIApplication.State.active
         {
             let alertController = UIAlertController(title: appName, message: alertMessage, preferredStyle: .alert)
             
@@ -259,7 +264,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             topWindow.makeKeyAndVisible()
             topWindow.rootViewController?.present(alertController, animated: true, completion: nil)
         }
-        else if appState == UIApplicationState.background || appState == UIApplicationState.inactive
+        else if appState == UIApplication.State.background || appState == UIApplication.State.inactive
         {
             let customURLTemp = NSURL(string: appName)
             

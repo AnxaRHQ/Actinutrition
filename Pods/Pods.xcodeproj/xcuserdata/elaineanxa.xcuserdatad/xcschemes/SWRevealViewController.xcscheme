@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '551A74D84E528D47B465BF473AD9C2A1'
-               BlueprintName = 'SWRevealViewController'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SWRevealViewController.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "45D90560148BB905343D6BF29DE3F0C7"
+               BlueprintName = "SWRevealViewController"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "SWRevealViewController.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

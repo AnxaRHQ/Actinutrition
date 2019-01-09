@@ -176,7 +176,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             menuCell?.mainHeaderLabel.text = mainMenuArray[4]
         }
         
-        menuCell?.separatorInset = UIEdgeInsetsMake(0, 0, 0, .greatestFiniteMagnitude)
+        menuCell?.separatorInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
         
         return menuCell!
     }

@@ -73,7 +73,7 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         tryAgainButton.layer.masksToBounds = true
         tryAgainButton.layer.cornerRadius = 8
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor :  UIColor.init(red: 132/255, green: 187/255, blue: 35/255, alpha: 1.0)]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor :  UIColor.init(red: 132/255, green: 187/255, blue: 35/255, alpha: 1.0)]
     }
     
     func addWKWebViewToView()
@@ -162,44 +162,46 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     @objc func checkInternetConnection()
     {
         DispatchQueue.main.async
-            {
-                AFNetworkReachabilityManager.shared().setReachabilityStatusChange { (status: AFNetworkReachabilityStatus) -> Void in
-                    switch status
-                    {
-                    case .notReachable:
-                        print("Not reachable")
-                        
-                        /*Stop Activity Indicator*/
-                        
-                        self.stopAILoader()
-                        
-                    case .reachableViaWiFi, .reachableViaWWAN:
-                        print("Reachable")
-                        
-                        self.hideNoInternetConnectionView()
-                        
-                        /*Load Activity Indicator*/
-                        
-                        self.startAILoader()
-                        
-                    case .unknown:
-                        
-                        print("Unknown")
-                        
-                        /*Stop Activity Indicator*/
-                        
-                        self.stopAILoader()
-                    }
+        {
+            AFNetworkReachabilityManager.shared().setReachabilityStatusChange({ (status) in
+                
+                switch status
+                {
+                case .notReachable:
+                    print("Not reachable")
                     
-                    /*Reload WebView*/
+                    /*Stop Activity Indicator*/
                     
-                    self.mainWebview.reload()
+                    self.stopAILoader()
                     
-                    if (self.mainWebview.url?.absoluteString == nil)
-                    {
-                        self.loadURL()
-                    }
+                case .reachableViaWiFi, .reachableViaWWAN:
+                    print("Reachable")
+                    
+                    self.hideNoInternetConnectionView()
+                    
+                    /*Load Activity Indicator*/
+                    
+                    self.startAILoader()
+                    
+                case .unknown:
+                    
+                    print("Unknown")
+                    
+                    /*Stop Activity Indicator*/
+                    
+                    self.stopAILoader()
                 }
+                
+                /*Reload WebView*/
+                
+                self.mainWebview.reload()
+                
+                if (self.mainWebview.url?.absoluteString == nil)
+                {
+                    self.loadURL()
+                }
+                
+            })
         }
     }
     
@@ -377,18 +379,18 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     {
         noInternetConnectionView.isHidden = true
         
-        view.sendSubview(toBack: noInternetConnectionView)
-        view.bringSubview(toFront: mainWebview)
-        view.bringSubview(toFront: ai_loader)
+        view.sendSubviewToBack(noInternetConnectionView)
+        view.bringSubviewToFront(mainWebview)
+        view.bringSubviewToFront(ai_loader)
     }
     
     func unhideNoInternetConnectionView()
     {
         noInternetConnectionView.isHidden = false
         
-        view.sendSubview(toBack: mainWebview)
-        view.bringSubview(toFront: noInternetConnectionView)
-        view.bringSubview(toFront: ai_loader)
+        view.sendSubviewToBack(mainWebview)
+        view.bringSubviewToFront(noInternetConnectionView)
+        view.bringSubviewToFront(ai_loader)
         
         stopAILoader()
     }
